@@ -1,0 +1,35 @@
+-- a minimal blockdiagram to start the block
+
+return bd.system
+{
+   imports = {
+      "std_types/stdtypes/stdtypes.so",
+      "types/std_triggers_types.so",
+      "types/std_random_types.so",
+      "std_blocks/lfds_buffers/lfds_cyclic.so",
+      "std_blocks/logging/file_logger.so",
+      "std_blocks/hexdump/hexdump.so",
+      "blocks/ptrigmod.so",
+      "blocks/randommod.so",
+   },
+
+   blocks = {
+      { name="random_1", type="random/random" },
+      { name="ptrig_1", type="std_triggers/ptrig" },
+      { name="hexdump1", type="hexdump/hexdump" },
+   },
+   
+   connections = {
+      { src="random_1.rnd", tgt="hexdump1" },
+      --{ src="random_1.rnd", tgt="fifo1" },
+   },
+
+   
+   configurations = {
+      { name="random_1", config = {min_max_config={min=10, max=125} } },
+     -- { name="fifo1", config = { type_name="unsigned int", buffer_len=3 } },
+      { name="ptrig_1", config = { period = {sec=0, usec=100000 }, trig_blocks={ { b="#random_1", num_steps=1, measure=0 },
+                                                                                 } } }
+   }
+}
+

@@ -1,0 +1,18 @@
+# - Config file for the std_random package
+# It defines the following variables
+#  STD_RANDOM_TYPES_INCLUDE_DIRS - include directories for std_random_types
+#  STD_RANDOM_TYPES_LIBRARIES    - libraries to link against
+ 
+# Compute paths
+#get_filename_component(STD_RANDOM_TYPES_CMAKE_DIR "${STD_RANDOM_TYPES_CMAKE_DIR}" PATH)
+set(STD_RANDOM_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+set(STD_RANDOM_TYPES_CMAKE_DIR "@CONF_CMAKE_DIR@")
+
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+if(NOT TARGET std_random AND NOT STD_RANDOM_TYPES_BINARY_DIR)
+  include("${STD_RANDOM_TYPES_CMAKE_DIR}/std-random-types-targets.cmake")
+endif()
+ 
+# These are IMPORTED targets created by std-random-types-targets.cmake
+set(STD_RANDOM_TYPES_LIBRARIES std_random)

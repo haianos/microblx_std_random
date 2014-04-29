@@ -1,0 +1,18 @@
+return pkg
+{
+  name="std_random",
+  path="../",
+  
+  types = {
+    { name="random_config", dir="types" },
+    { name="random_info", dir="types" },
+  },
+  
+  blocks = {
+    { name="random", file="/home/haianos/enea_microblx/create_random/random.blx", src_dir="src" },
+  },
+  
+  libraries = {
+    { name="randommod", blocks={"random"} },
+  },
+}
